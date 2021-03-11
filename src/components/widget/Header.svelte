@@ -1,14 +1,12 @@
 <script>
-    // your script goes here
+  import Paper, { Title, Subtitle, Content } from "svelte-material-ui";
 </script>
 
-<style>
-    .header {
-        height: 70px;
-        border: 1px solid red;
-    }
-</style>
+<div class="header">header</div>
 
-<div class="header">
-    header
-</div>
+<style>
+  .header {
+    height: 70px;
+    border: 1px solid red;
+  }
+</style>
