@@ -8,7 +8,7 @@
     .widget {
         height: 600px;
         width: 350px;
-        border: 1px solid gray;
+        /* border: 1px solid gray; */
         position: fixed;
         bottom: 10px;
         right: 10px;

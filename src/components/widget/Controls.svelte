@@ -9,6 +9,6 @@
     }
 </style>
 
-<div class="controls">
+<div class="controls rounded-b-lg">
     Enter message
 </div>

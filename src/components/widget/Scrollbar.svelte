@@ -1,5 +1,5 @@
 <script>
-    // your script goes here
+    import { Avatar, MaterialApp } from 'svelte-materialify';
 </script>
 
 <style>
@@ -11,4 +11,5 @@
 
 <div class="scrollbar">
     content
+    <Avatar size="36px" class="primary-color">B</Avatar>
 </div>
