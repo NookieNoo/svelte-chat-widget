@@ -1,32 +1,6 @@
 <script>
     import { Avatar, Container, Row, Col } from 'svelte-materialify';
-    let messages = [
-        {
-            isFromBot: true,
-            message: 'Hello!',
-            timestamp: '02-02-2020',
-        },
-        {
-            isFromBot: true,
-            message: 'How are you?',
-            timestamp: '02-02-2020',
-        },
-        {
-            isFromBot: false,
-            message: 'some message',
-            timestamp: '02-02-2020',
-        },
-        {
-            isFromBot: false,
-            message:
-                'Hello have any questions or feedback? Alex or Kam will reply as soon as they can! In the meantime, come join our community Slack.',
-            timestamp: '02-02-2020',
-        },
-        {
-            isFromBot: true,
-            message: 'Bye!',
-        },
-    ];
+    export let messages = [];
 </script>
 
 <style>
@@ -39,7 +13,7 @@
 
 <div class="scrollbar grey lighten-5 pa-2">
     <Container>
-        {#each messages as msg}
+        {#each messages as msg, index (msg.timestamp)}
             {#if msg.isFromBot}
                 <div class="d-flex mt-2 align-center">
                     <div>

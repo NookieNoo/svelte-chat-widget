@@ -1,18 +1,25 @@
 <script>
+    import { createEventDispatcher } from 'svelte';
     import { Row, Col, Textarea, MaterialApp, Icon, Button, Divider } from 'svelte-materialify';
     import { mdiSend } from '@mdi/js';
+    import { enter } from '../../utils/keydownActions.js';
+
+    export let value;
+    const dispatch = createEventDispatcher();
+
+    const submit = () =>  {
+        dispatch('submit', value);
+        value = '';
+    }
 </script>
 
 <style>
-    .controls {
-        /* height: 100px; */
-        /* border: 1px solid black; */
-    }
+
 </style>
 
-<div class="controls rounded-b-lg">
+<div class="rounded-b-lg">
     <Divider />
-    <Textarea placeholder="Start typing..." outlined rows=2>
+    <Textarea bind:value={value} on:change={submit} on:enter={submit} color="black" placeholder="Start typing..." outlined rows=2 noResize>
         <div slot="append" >
             <Button fab size="small">
                 <Icon path={mdiSend}/>

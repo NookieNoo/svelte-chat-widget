@@ -13,13 +13,10 @@
 </div>
 
 <style>
-  .header {
-    /* height: 80px; */
-    /* border: 1px solid red; */
-  }
   .icon {
     position: absolute;
     right: 4px;
     top: 4px;
+    cursor: pointer;
   }
 </style>
