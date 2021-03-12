@@ -1,5 +1,5 @@
 <script>
-  import Paper, { Title, Subtitle, Content } from "svelte-material-ui";
+  
 </script>
 
 <div class="header">header</div>

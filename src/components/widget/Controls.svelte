@@ -1,5 +1,5 @@
 <script>
-    // your script goes here
+    import { Button } from 'svelte-materialify';
 </script>
 
 <style>
@@ -11,4 +11,5 @@
 
 <div class="controls">
     Enter message
+    <Button />
 </div>
