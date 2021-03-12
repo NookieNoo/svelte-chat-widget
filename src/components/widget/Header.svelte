@@ -1,15 +1,25 @@
 <script>
-  import { Row, Col, MaterialApp, Button } from 'svelte-materialify';
+  import { Row, Col, MaterialApp, Button, Icon } from 'svelte-materialify';
+  import { mdiClose } from '@mdi/js';
 </script>
 
-<!-- <div class="header rounded-t-lg blue white-text pa-8 mb-2">header</div> -->
-<div class="header blue white-text rounded-t-lg">
-  <div class="text-body-1">header</div>
+<div class="primary-color white-text rounded-t-lg pa-3 d-flex flex-column align-start">
+  <div class="icon">
+    <Icon path={mdiClose} />
+  </div>
+
+  <div class="text-h6">Welcome!</div>
+  <div class="text-subtitle-2">Ask us anything using the chat window</div>
 </div>
 
 <style>
   .header {
-    height: 70px;
+    /* height: 80px; */
     /* border: 1px solid red; */
+  }
+  .icon {
+    position: absolute;
+    right: 4px;
+    top: 4px;
   }
 </style>

@@ -2,13 +2,14 @@
     import Header from './Header.svelte';
     import Controls from './Controls.svelte';
     import Scrollbar from './Scrollbar.svelte';
+    import { Card, CardText, CardActions, Button, MaterialApp } from 'svelte-materialify';
 </script>
 
 <style>
     .widget {
-        height: 600px;
-        width: 350px;
-        /* border: 1px solid gray; */
+        height: 700px;
+        width: 375px;
+        /* border: 1px solid red; */
         position: fixed;
         bottom: 10px;
         right: 10px;
@@ -18,7 +19,9 @@
     }
 </style>
 
-<div class="widget">
+
+
+<div class="widget elevation-10 rounded-lg">
     <Header />
     <Scrollbar />
     <Controls />
