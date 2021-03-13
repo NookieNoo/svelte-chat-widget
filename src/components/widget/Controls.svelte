@@ -1,8 +1,7 @@
 <script>
-    import { createEventDispatcher } from 'svelte';
+    import { createEventDispatcher, onMount } from 'svelte';
     import { Row, Col, Textarea, TextField, MaterialApp, Icon, Button, Divider, Jump } from 'svelte-materialify';
     import { mdiSend } from '@mdi/js';
-    import { enter } from '../../utils/keydownActions.js';
 
     export let value;
     const dispatch = createEventDispatcher();
@@ -11,6 +10,21 @@
         dispatch('submit', value);
         value = '';
     }
+
+    const onKeyDown = (e) => {
+        if (e.code === 'Enter') {
+            dispatch('submit', value);
+            value = '';
+        }
+    }
+
+    onMount(function() {
+        //TODO Разобраться с костылем
+        let textfield = document.getElementById('textfield');
+        let input = document.getElementsByTagName('input');
+        input[0].focus();
+	});
+
 </script>
 
 <style>
@@ -19,11 +33,9 @@
 
 <div class="rounded-b-lg">
     <Divider />
-
-
-    <TextField bind:value={value} on:change={submit} color="black" placeholder="Start typing..." outlined rows=2 noResize>
+    <TextField id='textfield' bind:value={value} on:keydown={onKeyDown} color="black" placeholder="Start typing..." outlined>
         <div slot="append" >
-            <Button fab size="small" class="primary-color white-text">
+            <Button on:click={submit} fab size="small" class="primary-color white-text">
                 <Icon path={mdiSend}/>
             </Button>
         </div>

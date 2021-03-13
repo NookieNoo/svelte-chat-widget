@@ -22,13 +22,13 @@
                     <div>
                         <Avatar size="32px" class="deep-purple white-text">B</Avatar>
                     </div>
-                    <div class="deep-purple lighten-4 text-caption rounded pa-2 ml-2 mr-8">
+                    <div class="grey lighten-2 text-caption rounded pa-2 ml-2 mr-8">
                         {msg.message}
                     </div>
                 </div>
             {:else}
                 <div class="mt-2 d-flex justify-end msg">
-                    <div class="grey lighten-2 text-caption rounded pa-2 ml-10">
+                    <div class="deep-purple lighten-4 text-caption rounded pa-2 ml-10">
                         {msg.message}
                     </div>
                 </div>
