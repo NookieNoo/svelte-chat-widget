@@ -7,14 +7,18 @@
     const dispatch = createEventDispatcher();
 
     const submit = () =>  {
-        dispatch('submit', value);
-        value = '';
+        if (value) {
+            dispatch('submit', value);
+            value = '';
+        }
     }
 
     const onKeyDown = (e) => {
         if (e.code === 'Enter') {
-            dispatch('submit', value);
-            value = '';
+            if (value) {
+                dispatch('submit', value);
+                value = '';
+            }
         }
     }
 
@@ -33,7 +37,7 @@
 
 <div class="rounded-b-lg">
     <Divider />
-    <TextField id='textfield' bind:value={value} on:keydown={onKeyDown} color="black" placeholder="Start typing..." outlined>
+    <TextField id='textfield' autocomplete="off" bind:value={value} on:keydown={onKeyDown} color="black" placeholder="Start typing..." outlined>
         <div slot="append" >
             <Button on:click={submit} fab size="small" class="primary-color white-text">
                 <Icon path={mdiSend}/>
