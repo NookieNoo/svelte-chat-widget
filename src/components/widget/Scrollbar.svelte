@@ -9,13 +9,16 @@
         overflow-y: scroll;
         /* border: 1px solid red; */
     }
+    .msg:last-child {
+        border: 1px solid red;
+    }
 </style>
 
 <div class="scrollbar grey lighten-5 pa-2">
     <Container>
         {#each messages as msg, index (msg.timestamp)}
             {#if msg.isFromBot}
-                <div class="d-flex mt-2 align-center">
+                <div class="d-flex mt-2 align-center msg">
                     <div>
                         <Avatar size="32px" class="deep-purple white-text">B</Avatar>
                     </div>
@@ -24,7 +27,7 @@
                     </div>
                 </div>
             {:else}
-                <div class="mt-2 d-flex justify-end">
+                <div class="mt-2 d-flex justify-end msg">
                     <div class="grey lighten-2 text-caption rounded pa-2 ml-10">
                         {msg.message}
                     </div>

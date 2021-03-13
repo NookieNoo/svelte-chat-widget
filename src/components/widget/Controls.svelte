@@ -1,6 +1,6 @@
 <script>
     import { createEventDispatcher } from 'svelte';
-    import { Row, Col, Textarea, MaterialApp, Icon, Button, Divider } from 'svelte-materialify';
+    import { Row, Col, Textarea, TextField, MaterialApp, Icon, Button, Divider, Jump } from 'svelte-materialify';
     import { mdiSend } from '@mdi/js';
     import { enter } from '../../utils/keydownActions.js';
 
@@ -19,11 +19,13 @@
 
 <div class="rounded-b-lg">
     <Divider />
-    <Textarea bind:value={value} on:change={submit} on:enter={submit} color="black" placeholder="Start typing..." outlined rows=2 noResize>
+
+
+    <TextField bind:value={value} on:change={submit} color="black" placeholder="Start typing..." outlined rows=2 noResize>
         <div slot="append" >
-            <Button fab size="small">
+            <Button fab size="small" class="primary-color white-text">
                 <Icon path={mdiSend}/>
             </Button>
         </div>
-    </Textarea>
+    </TextField>
 </div>

@@ -1,10 +1,15 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import { Row, Col, MaterialApp, Button, Icon } from 'svelte-materialify';
   import { mdiClose } from '@mdi/js';
+
+  const dispatch = createEventDispatcher();
+  const close = () => dispatch('close');
+
 </script>
 
 <div class="primary-color white-text rounded-t-lg pa-3 d-flex flex-column align-start">
-  <div class="icon">
+  <div class="icon" on:click={close}>
     <Icon path={mdiClose} />
   </div>
 

@@ -2,8 +2,11 @@
     import Header from './Header.svelte';
     import Controls from './Controls.svelte';
     import Scrollbar from './Scrollbar.svelte';
-    import { Card, CardText, CardActions, Button, MaterialApp } from 'svelte-materialify';
+    import { Card, CardText, CardActions, Button, MaterialApp, Icon } from 'svelte-materialify';
+    import { mdiMessageReply, mdiClose } from '@mdi/js';
+    import { fade } from 'svelte/transition';
 
+    let isOpen = false;
     let messages = [
         {
             isFromBot: true,
@@ -41,27 +44,43 @@
             message: evt.detail,
             timestamp: Date.now(),
         }];
-        // console.log(evt.detail);
     }
+
+    const openChat = () => isOpen = !isOpen;
 </script>
 
 <style>
     .widget {
         height: 700px;
-        width: 375px;
+        max-width: 375px;
         position: fixed;
-        bottom: 10px;
+        bottom: 100px;
         right: 10px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
+    .btn-open {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+    }
 </style>
 
 
-
-<div class="widget elevation-10 rounded-lg">
-    <Header />
-    <Scrollbar messages={messages}/>
-    <Controls bind:value={msg} on:submit={addMessage}/>
+{#if isOpen}
+    <div class="widget elevation-10 rounded-lg" transition:fade="{{ duration: 150 }}">
+        <Header on:close={openChat}/>
+        <Scrollbar messages={messages}/>
+        <Controls bind:value={msg} on:submit={addMessage}/>
+    </div>
+{/if}
+<div class="btn-open">
+    <Button fab size="default" on:click={openChat} class="primary-color white-text">
+        {#if isOpen}
+            <Icon path={mdiClose} />
+        {:else}
+            <Icon path={mdiMessageReply} />
+        {/if}
+    </Button>
 </div>
