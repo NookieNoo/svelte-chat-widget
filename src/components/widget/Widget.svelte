@@ -5,38 +5,19 @@
     import { Card, CardText, CardActions, Button, MaterialApp, Icon } from 'svelte-materialify';
     import { mdiMessageReply, mdiClose } from '@mdi/js';
     import { fade } from 'svelte/transition';
-
-    console.log(localStorage);
+    import testMessages from '../../utils/testMessages';
 
     let isOpen = false;
-    let messages = [
-        {
-            isFromBot: true,
-            message: 'Hello!',
-            timestamp: '02-02-2020',
-        },
-        {
-            isFromBot: true,
-            message: 'How are you?',
-            timestamp: '03-02-2020',
-        },
-        {
-            isFromBot: false,
-            message: 'some message',
-            timestamp: '04-02-2020',
-        },
-        {
-            isFromBot: false,
-            message:
-                'Hello have any questions or feedback? Alex or Kam will reply as soon as they can! In the meantime, come join our community Slack.',
-            timestamp: '05-02-2020',
-        },
-        {
-            isFromBot: true,
-            message: 'Bye!',
-            timestamp: '06-02-2020',
-        },
-    ];
+    let messages;
+
+    if (localStorage.getItem('messages')) {
+        messages = JSON.parse(localStorage.getItem('messages'));
+        console.log('getFromStorage');
+    } else {
+        messages = testMessages;
+        localStorage.setItem('messages', JSON.stringify(testMessages))
+        console.log('getFromTest', messages);
+    }
 
     let msg = '';
 
