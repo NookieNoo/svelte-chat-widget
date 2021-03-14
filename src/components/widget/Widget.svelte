@@ -6,6 +6,7 @@
     import { mdiMessageReply, mdiClose } from '@mdi/js';
     import { fade } from 'svelte/transition';
     import testMessages from '../../utils/testMessages';
+    import * as animateScroll from "svelte-scrollto";
 
     let isOpen = false;
     let messages;
@@ -45,12 +46,14 @@
     }
 
     const handleSubmit = (evt) => {
+        animateScroll.scrollTo({container: '.scrollbar', element: '.msg:last-child'});
         const myMsg = evt.detail;
         isLoading = true;
         addMessage(myMsg);
         sendMsg((msg) => {
             addMessage(msg, true);
             isLoading = false;
+            animateScroll.scrollTo({container: '.scrollbar', element: '.msg:last-child'});
         });
     }
 

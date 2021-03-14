@@ -5,9 +5,9 @@
 
 <style>
     .scrollbar {
-        height: 100%;
+        /* height: 100%; */
+        /* height: 500px; */
         overflow-y: scroll;
-        border: 1px solid red;
     }
     .msg:last-child {
         /* border: 1px solid red; */
