@@ -1,9 +1,10 @@
 <script>
     import { createEventDispatcher, onMount } from 'svelte';
-    import { Row, Col, Textarea, TextField, MaterialApp, Icon, Button, Divider, Jump } from 'svelte-materialify';
+    import { Row, Col, Textarea, TextField, MaterialApp, Icon, Button, Divider, Jump, ProgressLinear } from 'svelte-materialify';
     import { mdiSend } from '@mdi/js';
 
     export let value;
+    export let isLoading;
     const dispatch = createEventDispatcher();
 
     function handleSubmit(eValue) {
@@ -32,6 +33,9 @@
 </script>
 
 <div class="rounded-b-lg">
+    {#if isLoading}
+        <ProgressLinear indeterminate/>
+    {/if}
     <Divider />
     <TextField id='chatInput' autocomplete="off" bind:value={value} on:keydown={onKeyDown} color="black" placeholder="Start typing..." outlined>
         <div slot="append" >

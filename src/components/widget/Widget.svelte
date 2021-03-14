@@ -20,6 +20,7 @@
     }
 
     let msg = '';
+    let isLoading = false;
 
     async function sendMsg(successCallback) {
         const url = 'https://jsonplaceholder.typicode.com/comments';
@@ -28,7 +29,7 @@
         if (response.ok) {
             const comments = await response.json();
             console.log(comments[0]);
-            successCallback(comments[0].name);
+            setTimeout(() => successCallback(comments[0].name), 1000);
         } else {
             console.log("Ошибка HTTP: " + response.status);
         }
@@ -45,8 +46,12 @@
 
     const handleSubmit = (evt) => {
         const myMsg = evt.detail;
+        isLoading = true;
         addMessage(myMsg);
-        sendMsg((msg) => addMessage(msg, true));
+        sendMsg((msg) => {
+            addMessage(msg, true);
+            isLoading = false;
+        });
     }
 
     const openChat = () => isOpen = !isOpen;
@@ -54,8 +59,8 @@
 
 <style>
     .widget {
-        min-height: 500px;
-        max-height: 700px;
+        /* min-height: 500px; */
+        height: 700px;
         max-width: 375px;
         position: fixed;
         bottom: 100px;
@@ -78,7 +83,7 @@
     <div class="widget elevation-10 rounded-lg" transition:fade="{{ duration: 150 }}">
         <Header on:close={openChat}/>
         <Scrollbar messages={messages}/>
-        <Controls bind:value={msg} on:submit={handleSubmit}/>
+        <Controls bind:value={msg} bind:isLoading={isLoading} on:submit={handleSubmit}/>
     </div>
 {/if}
 <div class="btn-open">
