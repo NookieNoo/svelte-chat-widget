@@ -6,38 +6,34 @@
     export let value;
     const dispatch = createEventDispatcher();
 
-    const submit = () =>  {
-        if (value) {
-            dispatch('submit', value);
+    function handleSubmit(eValue) {
+        if (eValue) {
+            dispatch('submit', eValue);
             value = '';
         }
     }
 
-    const onKeyDown = (e) => {
+    function submit() {
+        handleSubmit(value);
+    }
+
+    function onKeyDown(e) {
         if (e.code === 'Enter') {
-            if (value) {
-                dispatch('submit', value);
-                value = '';
-            }
+            handleSubmit(value);
         }
     }
 
     onMount(function() {
-        //TODO Разобраться с костылем
-        let textfield = document.getElementById('textfield');
-        let input = document.getElementsByTagName('input');
-        input[0].focus();
+        //TODO Разобраться с костылем (не фокусируется на TextField)
+        let chatInput = document.querySelector("#chatInput");
+        chatInput.focus();
 	});
 
 </script>
 
-<style>
-
-</style>
-
 <div class="rounded-b-lg">
     <Divider />
-    <TextField id='textfield' autocomplete="off" bind:value={value} on:keydown={onKeyDown} color="black" placeholder="Start typing..." outlined>
+    <TextField id='chatInput' autocomplete="off" bind:value={value} on:keydown={onKeyDown} color="black" placeholder="Start typing..." outlined>
         <div slot="append" >
             <Button on:click={submit} fab size="small" class="primary-color white-text">
                 <Icon path={mdiSend}/>

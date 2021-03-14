@@ -7,10 +7,10 @@
     .scrollbar {
         height: 100%;
         overflow-y: scroll;
-        /* border: 1px solid red; */
+        border: 1px solid red;
     }
     .msg:last-child {
-        border: 1px solid red;
+        /* border: 1px solid red; */
     }
 </style>
 
