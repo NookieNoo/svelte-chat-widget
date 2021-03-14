@@ -40,6 +40,7 @@
             message: msg,
             timestamp: Date.now(),
         }];
+        localStorage.setItem('messages', JSON.stringify(messages));
     }
 
     const handleSubmit = (evt) => {
