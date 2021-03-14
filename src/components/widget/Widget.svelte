@@ -7,16 +7,18 @@
     import { fade } from 'svelte/transition';
     import testMessages from '../../utils/testMessages';
     import * as animateScroll from "svelte-scrollto";
+    import { formatTime } from '../../utils/dateHelper';
 
     let isOpen = false;
     let messages;
 
-    if (localStorage.getItem('messages')) {
+    if (localStorage.getItem('expiry') > Date.now()) {
         messages = JSON.parse(localStorage.getItem('messages'));
         console.log('getFromStorage');
     } else {
         messages = testMessages;
         localStorage.setItem('messages', JSON.stringify(testMessages))
+        localStorage.setItem('expiry', Date.now() + 86400000) // 1day
         console.log('getFromTest', messages);
     }
 
@@ -36,11 +38,11 @@
         }
     }
 
-    const addMessage = (msg, isFromBot = false) => {
+    const addMessage = (msg, sender = 'user') => {
         messages = [...messages, {
-            isFromBot,
+            sender,
             message: msg,
-            timestamp: Date.now(),
+            timestamp: formatTime(new Date()),
         }];
         localStorage.setItem('messages', JSON.stringify(messages));
     }
@@ -51,7 +53,7 @@
         isLoading = true;
         addMessage(myMsg);
         sendMsg((msg) => {
-            addMessage(msg, true);
+            addMessage(msg, 'bot');
             isLoading = false;
             animateScroll.scrollTo({container: '.scrollbar', element: '.msg:last-child'});
         });

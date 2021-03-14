@@ -5,7 +5,7 @@
 
 <style>
     .scrollbar {
-        /* height: 100%; */
+        height: 100%;
         /* height: 500px; */
         overflow-y: scroll;
     }
@@ -16,8 +16,8 @@
 
 <div class="scrollbar grey lighten-5 pa-2">
     <Container>
-        {#each messages as msg, index (msg.timestamp)}
-            {#if msg.isFromBot}
+        {#each messages as msg, index}
+            {#if msg.sender === 'bot'}
                 <div class="d-flex mt-2 align-center msg">
                     <div>
                         <Avatar size="32px" class="deep-purple white-text">B</Avatar>

@@ -1,29 +1,31 @@
+import { formatTime } from './dateHelper';
+
 const testMessages = [
     {
-        isFromBot: true,
+        sender: 'bot',
         message: 'Hello!',
-        timestamp: '02-02-2020',
+        timestamp: formatTime(new Date()),
     },
     {
-        isFromBot: true,
+        sender: 'bot',
         message: 'How are you?',
-        timestamp: '03-02-2020',
+        timestamp: formatTime(new Date()),
     },
     {
-        isFromBot: false,
+        sender: 'user',
         message: 'some message',
-        timestamp: '04-02-2020',
+        timestamp: formatTime(new Date()),
     },
     {
-        isFromBot: false,
+        sender: 'user',
         message:
             'Hello have any questions or feedback? Alex or Kam will reply as soon as they can! In the meantime, come join our community Slack.',
-        timestamp: '05-02-2020',
+            timestamp: formatTime(new Date()),
     },
     {
-        isFromBot: true,
+        sender: 'bot',
         message: 'Bye!',
-        timestamp: '06-02-2020',
+        timestamp: formatTime(new Date()),
     },
 ];
 
