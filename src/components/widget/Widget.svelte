@@ -81,22 +81,23 @@
 
 <style>
     .widget {
-        /* min-height: 500px; */
         height: 700px;
-        max-width: 375px;
-        position: fixed;
+        /* max-width: 375px;
+        min-width: 350px; */
+        width: 375px;
         bottom: 100px;
-        right: 20px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        z-index: 1000;
         background-color: white;
     }
     .btn-open {
-        position: fixed;
         bottom: 10px;
+    }
+    .widget, .btn-open {
+        position: fixed;
         right: 20px;
+        z-index: 1000;
     }
 </style>
 
