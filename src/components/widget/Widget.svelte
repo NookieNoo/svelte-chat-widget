@@ -8,9 +8,19 @@
     import testMessages from '../../utils/testMessages';
     import * as animateScroll from "svelte-scrollto";
     import { formatTime } from '../../utils/dateHelper';
+    import { onMount } from 'svelte';
 
     let isOpen = false;
     let messages;
+
+    let isBotOnline = false;
+
+    onMount(async () => {
+        const response = await fetch(`http://localhost:5000`);
+        if (response.ok) {
+            isBotOnline = true;
+        }
+    });
 
     if (localStorage.getItem('expiry') > Date.now()) {
         messages = JSON.parse(localStorage.getItem('messages'));
@@ -25,14 +35,19 @@
     let msg = '';
     let isLoading = false;
 
-    async function sendMsg(successCallback) {
-        const url = 'https://jsonplaceholder.typicode.com/comments';
-        let response = await fetch(url);
+    async function sendMsg(myMsg, successCallback) {
+        const url = 'http://localhost:5000/chat';
+        let response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `message=${myMsg}`,
+        });
 
         if (response.ok) {
-            const comments = await response.json();
-            console.log(comments[0]);
-            setTimeout(() => successCallback(comments[0].name), 1000);
+            const respData = await response.json();
+            successCallback(respData);
         } else {
             console.log("Ошибка HTTP: " + response.status);
         }
@@ -42,7 +57,7 @@
         messages = [...messages, {
             sender,
             message: msg,
-            timestamp: formatTime(new Date()),
+            timestamp: Date.now(),
         }];
         localStorage.setItem('messages', JSON.stringify(messages));
     }
@@ -52,8 +67,8 @@
         const myMsg = evt.detail;
         isLoading = true;
         addMessage(myMsg);
-        sendMsg((msg) => {
-            addMessage(msg, 'bot');
+        sendMsg(myMsg, (resp) => {
+            addMessage(resp.message, 'bot');
             isLoading = false;
             animateScroll.scrollTo({container: '.scrollbar', element: '.msg:last-child'});
         });
@@ -69,7 +84,7 @@
         max-width: 375px;
         position: fixed;
         bottom: 100px;
-        right: 10px;
+        right: 20px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -79,7 +94,7 @@
     .btn-open {
         position: fixed;
         bottom: 10px;
-        right: 10px;
+        right: 20px;
     }
 </style>
 
@@ -87,8 +102,8 @@
 {#if isOpen}
     <div class="widget elevation-10 rounded-lg" transition:fade="{{ duration: 150 }}">
         <Header on:close={openChat}/>
-        <Scrollbar messages={messages}/>
-        <Controls bind:value={msg} bind:isLoading={isLoading} on:submit={handleSubmit}/>
+        <Scrollbar messages={messages} bind:isBotOnline={isBotOnline}/>
+        <Controls bind:value={msg} bind:isLoading={isLoading} disabled={!isBotOnline} on:submit={handleSubmit}/>
     </div>
 {/if}
 <div class="btn-open">

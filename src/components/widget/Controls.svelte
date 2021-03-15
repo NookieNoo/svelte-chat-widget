@@ -5,6 +5,10 @@
 
     export let value;
     export let isLoading;
+
+    //TODO Разобраться чем проп отличается от bind
+    export let disabled;
+
     const dispatch = createEventDispatcher();
 
     function handleSubmit(eValue) {
@@ -37,7 +41,7 @@
         <ProgressLinear indeterminate/>
     {/if}
     <Divider />
-    <TextField id='chatInput' autocomplete="off" bind:value={value} on:keydown={onKeyDown} color="black" placeholder="Start typing..." outlined>
+    <TextField id='chatInput' disabled={disabled} autocomplete="off" bind:value={value} on:keydown={onKeyDown} color="black" placeholder="Start typing..." outlined>
         <div slot="append" >
             <Button on:click={submit} fab size="small" class="primary-color white-text">
                 <Icon path={mdiSend}/>
