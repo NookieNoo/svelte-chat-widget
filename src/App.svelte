@@ -1,9 +1,10 @@
 <script>
-	import Widget from './components/widget/Widget.svelte'
+	import Widget from './components/widget/Widget.svelte';
+	export let botUrl;
 </script>
 
 <div>
-	<Widget />
+	<Widget botUrl={botUrl}/>
 </div>
 
 <style>

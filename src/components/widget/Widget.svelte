@@ -10,13 +10,15 @@
     import { formatTime } from '../../utils/dateHelper';
     import { onMount } from 'svelte';
 
+    export let botUrl;
+
     let isOpen = false;
     let messages;
 
     let isBotOnline = false;
 
     onMount(async () => {
-        const response = await fetch(`http://localhost:5000`);
+        const response = await fetch(botUrl);
         if (response.ok) {
             isBotOnline = true;
         }
@@ -36,7 +38,7 @@
     let isLoading = false;
 
     async function sendMsg(myMsg, successCallback) {
-        const url = 'http://localhost:5000/chat';
+        const url = `${botUrl}/chat`;
         let response = await fetch(url, {
             method: 'POST',
             headers: {

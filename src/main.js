@@ -1,8 +1,11 @@
 import App from './App.svelte';
 
+const target = document.getElementById('chat-widget');
 const app = new App({
-	// target: document.body,
-	target: document.getElementById('chat-widget'),
+	target,
+	props: {
+		botUrl: target.getAttribute('data-url')
+	}
 });
 
 export default app;
